@@ -7,33 +7,51 @@ NOTA: non è importante l'ordine con cui l'utente inserisce i numeri, basta che 
 */
 
 
-const number_ul = document.getElementById('numbers-list');
+const number_list_el = document.getElementById('numbers-list');
+const input_numbers_el = document.getElementById('answers-form');
+const countdown_el = document.getElementById('countdown');
+const instructions_el = document.getElementById('instructions');
 
+let array_random_numbers = [];
 
 // 5 numeri random
 function get_random_numbers() {
 
    for(let i = 0; i < 5; i++) {
-        let random_numbers = Math.floor(Math.random() * 100);
-        console.log(random_numbers)
-        
-        number_ul.innerHTML += '<li>' + random_numbers + '</li>'
+        let random_numbers = Math.floor(Math.random() * 100);        
+        number_list_el.innerHTML += '<li>' + random_numbers + '</li>'
+        array_random_numbers.push(random_numbers)
     }
-    
-
-
 
 }
 
+get_random_numbers();
 
-get_random_numbers()
+console.log(array_random_numbers)
+
+// timer di 30 secondi poi scompaiono i numeri
+
+let seconds = 5;
+countdown_el.innerText = seconds
 
 
-// timer di 30 secondi
+
+const timer = setInterval(function() {
+
+    seconds--
+    countdown_el.innerText = seconds
+
+    if(seconds === 0) {
+        clearInterval(timer)
+        number_list_el.classList.add('d-none');
+        input_numbers_el.classList.remove('d-none');
+        instructions_el.innerText = 'Inserisci i numeri che hai visualizzato nell\'ordine che preferisci'
+    }
+
+}, 1000)
 
 
 
-// scompaiono i numeri
 // compaiono 5 input per inserire numeri
 // verificare quali corrispondono ai numeri random
 
