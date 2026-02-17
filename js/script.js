@@ -12,8 +12,9 @@ const answers_form_el = document.getElementById('answers-form');
 const countdown_el = document.getElementById('countdown');
 const instructions_el = document.getElementById('instructions');
 const message_el = document.getElementById('message');
+const answers_form_control_el = document.querySelectorAll('.form-control')
+
 let array_random_numbers = [];
-let array_answers_numbers = [];
 let array_matching_numbers = [];
 
 
@@ -56,15 +57,6 @@ const timer = setInterval(function() {
 
 
 
-// input numeri
-const answers_form_control_el_1 = document.querySelector('.form-control:nth-child(1)')
-const answers_form_control_el_2 = document.querySelector('.form-control:nth-child(2)')
-const answers_form_control_el_3 = document.querySelector('.form-control:nth-child(3)')
-const answers_form_control_el_4 = document.querySelector('.form-control:nth-child(4)')
-const answers_form_control_el_5 = document.querySelector('.form-control:nth-child(5)')
-
-
-
 // verificare quali corrispondono ai numeri random
 
 answers_form_el.addEventListener('submit', function(e) {
@@ -73,31 +65,19 @@ answers_form_el.addEventListener('submit', function(e) {
 
     number_list_el.classList.remove('d-none');
 
-    const answers_form_control_el_1_value = answers_form_control_el_1.value;
-    const answers_form_control_el_2_value = answers_form_control_el_2.value;
-    const answers_form_control_el_3_value = answers_form_control_el_3.value;
-    const answers_form_control_el_4_value = answers_form_control_el_4.value;
-    const answers_form_control_el_5_value = answers_form_control_el_5.value;
-    array_answers_numbers.push(answers_form_control_el_1_value);
-    array_answers_numbers.push(answers_form_control_el_2_value);
-    array_answers_numbers.push(answers_form_control_el_3_value);
-    array_answers_numbers.push(answers_form_control_el_4_value);
-    array_answers_numbers.push(answers_form_control_el_5_value);
-
     for(let i = 0; i < 5; i++) {
+
+        let input_value = answers_form_control_el[i].value
 
         for(let j = 0; j < 5; j++) {
 
-            if(array_random_numbers[i] == array_answers_numbers[j]) {
-                
-                array_matching_numbers.push(array_answers_numbers[j])
-
+            if(array_random_numbers[j] == input_value) {
+                array_matching_numbers.push(input_value)
+                message_el.innerText = `${array_matching_numbers.length} numeri corrispondenti (${array_matching_numbers.join(', ')})`;
             }
         }
 
     }
-
-    message_el.innerText = `${array_matching_numbers.length} numeri corrispondenti (${array_matching_numbers.join(', ')})`;
 
 });
 
