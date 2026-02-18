@@ -65,13 +65,26 @@ answers_form_el.addEventListener('submit', function(e) {
 
     number_list_el.classList.remove('d-none');
 
+    let duplicati = [];
+
     for(let i = 0; i < 5; i++) {
 
         let input_value = answers_form_control_el[i].value
 
-        for(let j = 0; j < 5; j++) {
+        // if(duplicati.includes(input_value)) {
 
-            if(array_random_numbers[j] == input_value) {
+        //     message_el.innerText = 'Hai inserito lo stesso numero due volte';
+            
+        // } else {
+            
+        //     duplicati.push(input_value)
+        
+        // } 
+
+        for(let j = 0; j < 5; j++) {
+            console.log(duplicati)
+
+            if (array_random_numbers[j] == input_value) {
                 array_matching_numbers.push(input_value)
                 message_el.innerText = `${array_matching_numbers.length} numeri corrispondenti (${array_matching_numbers.join(', ')})`;
             }
@@ -80,6 +93,7 @@ answers_form_el.addEventListener('submit', function(e) {
     }
 
 });
+
 
 
 
