@@ -65,32 +65,46 @@ answers_form_el.addEventListener('submit', function(e) {
 
     number_list_el.classList.remove('d-none');
 
-    let duplicati = [];
+    let numeri_utente = [];
 
+    // verifica duplicati
     for(let i = 0; i < 5; i++) {
 
-        let input_value = answers_form_control_el[i].value
+        let input_value = Number(answers_form_control_el[i].value)
 
-        // if(duplicati.includes(input_value)) {
+        if(!numeri_utente.includes(input_value)) {
 
-        //     message_el.innerText = 'Hai inserito lo stesso numero due volte';
-            
-        // } else {
-            
-        //     duplicati.push(input_value)
+            numeri_utente.push(input_value)
+
+        } 
+
+        console.log(numeri_utente)
         
-        // } 
+    }
+
+    if(numeri_utente.length == 5) {
 
         for(let j = 0; j < 5; j++) {
-            console.log(duplicati)
 
-            if (array_random_numbers[j] == input_value) {
-                array_matching_numbers.push(input_value)
-                message_el.innerText = `${array_matching_numbers.length} numeri corrispondenti (${array_matching_numbers.join(', ')})`;
+            if(array_random_numbers.includes(numeri_utente[j])) {
+                array_matching_numbers.push(numeri_utente[j])
             }
+        console.log(numeri_utente)
+
+
         }
+    
+        message_el.innerText = `${array_matching_numbers.length} numeri corrispondenti (${array_matching_numbers.join(', ')})`;
+
+    } else {
+
+        message_el.innerText = 'Hai inserito lo stesso numero due volte';
 
     }
+
+
+
+
 
 });
 
